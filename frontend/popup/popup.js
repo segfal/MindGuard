@@ -1,12 +1,13 @@
 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     var currentURL = tabs[0].url;
     console.log(currentURL);
-    if (currentURL.includes('leetcode.com')) {
+    if (currentURL.includes('youtube.com')) {
         var url = new URL(currentURL);
         var pathname = url.pathname;
-        var parts = pathname.split('/');
-        var questionName = parts[parts.length - 2];
 
+        //seperate the url 
+        var urlArray = pathname.split('/');
+        var videoID = urlArray[2];
 
         try{
             psuedoCode
@@ -16,7 +17,7 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         }
         
     } else 
-        console.log('This is not a leetcode website.');
+        console.log('This is not a youtube website website.');
 }
 );
 
