@@ -1,0 +1,2 @@
+name: Publish Chrome extension to Chrome Web Store              
+uses: MobileFirstLLC/cws-publish@2.1.1
