@@ -3,6 +3,7 @@ import re
 import requests
 import os
 from dotenv import load_dotenv
+
 def extract_video_id(url):
     match = re.search(r"youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)", url)
     if match:
