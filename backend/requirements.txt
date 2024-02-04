@@ -2,3 +2,4 @@ google-cloud-alloydb
 flask
 requests
 sqlalchemy
+google-cloud-language
