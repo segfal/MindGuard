@@ -17,10 +17,13 @@ def video() -> str:
     data = request.get_json()
     title = data['title']
     description = data['description']
-    video_id = data['video_id']
+    video_id = data['video_id'] # store the video id as a primary key in the database
     insert_data(title, description, video_id)
     
     sentiment_score = []
-    sentiment_score.append(analyze_sentiment(title))
-    sentiment_score.append(analyze_sentiment(description))
-    return jsonify(sentiment_score)
+    sentiment_score.append(analyze_sentiment(title)) #check if the title is positive or negative
+    sentiment_score.append(analyze_sentiment(description)) #check if the description is positive or negative
+    return jsonify(sentiment_score) 
+
+
+app.run(debug=True, port=5000)
