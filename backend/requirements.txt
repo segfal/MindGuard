@@ -1,0 +1,4 @@
+google-cloud-alloydb
+flask
+requests
+sqlalchemy
