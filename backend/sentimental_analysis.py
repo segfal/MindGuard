@@ -3,7 +3,7 @@ from google.cloud import language_v2
 import json
 import os
 
-def sample_analyze_sentiment(text_content: str = "I am so happy and joyful.") -> None:
+def analyze_sentiment(text_content: str = "I am so happy and joyful.") -> None:
     """
     Analyzes Sentiment in a string.
 
@@ -49,15 +49,9 @@ def sample_analyze_sentiment(text_content: str = "I am so happy and joyful.") ->
     print(f"Document sentiment magnitude: {response.document_sentiment.magnitude}")
     # Get sentiment for all sentences in the document
     for sentence in response.sentences:
-        print(f"Sentence text: {sentence.text.content}")
-        print(f"Sentence sentiment score: {sentence.sentiment.score}")
-        print(f"Sentence sentiment magnitude: {sentence.sentiment.magnitude}")
-
-    # Get the language of the text, which will be the same as
-    # the language specified in the request or, if not specified,
-    # the automatically-detected language.
-    print(f"Language of the text: {response.language_code}")
+        return sentence.sentiment.score
 
 
 
-sample_analyze_sentiment("I am so happy and joyful.")
+
+
