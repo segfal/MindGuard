@@ -5,6 +5,7 @@ var sideMenuLinks = document.getElementsByTagName("ytd-guide-entry-renderer");
 var sideRecommendedSection = document.getElementsByTagName(
   "ytd-compact-video-renderer"
 );
+var shortsMain = document.getElementsByTagName("ytd-thumbnail");
 var comments = document.getElementsByTagName("ytd-comments");
 
 var hideAllVideos = function () {
@@ -22,6 +23,11 @@ var hideAllVideos = function () {
     sideRecommendedSection[i].style.pointerEvents = "none";
     sideRecommendedSection[i].style.textDecoration = "none";
     sideRecommendedSection[i].style.filter = "blur(5px)";
+  }
+  for (var i = 0; i < shortsMain.length; i++) {
+    shortsMain[i].style.pointerEvents = "none";
+    shortsMain[i].style.textDecoration = "none";
+    shortsMain[i].style.filter = "blur(5px)";
   }
   //   auto playing videos
   let autoPlayingVideos = document.getElementsByClassName(
