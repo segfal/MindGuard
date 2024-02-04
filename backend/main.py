@@ -8,7 +8,7 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/video', methods=['POST']):
+@app.route('/video', methods=['POST'])
 def video() -> str:
     """
     Get the video data and insert it into the database.
