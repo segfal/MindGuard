@@ -1,34 +1,90 @@
-import psycopg2
+from datetime import datetime as Datetime, timezone as Timezone
 
 
-#using alloydb
-def connect():
-    return psycopg2.connect(
-        dbname='alloydb',
-        user
-        ='alloy',
-        password='alloy',
-        host='localhost'
-    )
 
-#using alloydb
-def init():
-    conn = connect()
-    cur = conn.cursor()
-    """Video  table
-        videoid : string
-        title : string
-        description : string
+import pg8000.dbapi
+from pg8000.converters import INET_ARRAY, INTEGER
 
-    """
-    cur.execute('''
-        CREATE TABLE IF NOT EXISTS video (
-            videoid TEXT PRIMARY KEY,
-            title TEXT,
-            description TEXT
-        )
-    ''')
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Replace these values with your Google Cloud SQL connection details
+db_user = os.getenv('DB_USER')
+db_password = os.getenv('DB_PASSWORD')
+db_host = os.getenv('DB_HOST')
+db_port = os.getenv('DB_PORT')
+db_name = os.getenv('DB_NAME')
+project_id = os.getenv('GCP_PROJECT_ID')
+instance_name = os.getenv('GCP_SQL_INSTANCE_NAME')
+
+
+
+import os
+
+from google.cloud.sql.connector import Connector, IPTypes
+import pg8000
+
+import sqlalchemy
+
+
+def connect_with_connector(db_user,db_pass,db_name,instance_connection_name,ip_type) -> sqlalchemy.engine.base.Engine:
     
-    cur.close()
-    conn.commit()
-    conn.close()
+    
+
+    ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
+
+    # initialize Cloud SQL Python Connector object
+    connector = Connector()
+
+    def getconn() -> pg8000.dbapi.Connection:
+        conn: pg8000.dbapi.Connection = connector.connect(
+            instance_connection_name,
+            "pg8000",
+            user=db_user,
+            password=db_pass,
+            db=db_name,
+            ip_type=ip_type,
+        )
+        return conn
+
+    # The Cloud SQL Python Connector can be used with SQLAlchemy
+    # using the 'creator' argument to 'create_engine'
+    pool = sqlalchemy.create_engine(
+        "postgresql+pg8000://",
+        creator=getconn,
+        # ...
+    )
+    return pool
+
+
+connect_with_connector(db_user,db_password,db_name,instance_connection_name=instance_name,ip_type=IPTypes.PUBLIC)
+
+
+#get all the data from the database
+def get_all_data() -> list:
+    """
+    Get all data from the database
+    """
+    # Replace these values with your Google Cloud SQL connection details.
+    db_user = os.getenv('DB_USER')
+    db_password = os.getenv('DB_PASSWORD')
+    db_host = os.getenv('DB_HOST')
+    db_port = os.getenv('DB_PORT')
+    db_name = os.getenv('DB_NAME')
+    project_id = os.getenv('GCP_PROJECT_ID')
+    instance_name = os.getenv('GCP_SQL_INSTANCE_NAME')
+
+    # Initialize the connection pool using the Cloud SQL Python Connector
+    pool = connect_with_connector(db_user,db_password,db_name,instance_name,ip_type=IPTypes.PUBLIC)
+
+    # Create a new database connection and execute the query
+    with pool.connect() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT * FROM sentiment")
+            results = cursor.fetchall()
+            return results
+        
+

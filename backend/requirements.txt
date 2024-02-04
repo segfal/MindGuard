@@ -3,3 +3,5 @@ flask
 requests
 sqlalchemy
 google-cloud-language
+"google-cloud-alloydb-connector[asyncpg]"
+"cloud-sql-python-connector[pg8000]"

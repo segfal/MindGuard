@@ -1,5 +1,7 @@
+from google.oauth2 import service_account
 from google.cloud import language_v2
-
+import json
+import os
 
 def sample_analyze_sentiment(text_content: str = "I am so happy and joyful.") -> None:
     """
@@ -8,8 +10,17 @@ def sample_analyze_sentiment(text_content: str = "I am so happy and joyful.") ->
     Args:
       text_content: The text content to analyze.
     """
-
-    client = language_v2.LanguageServiceClient()
+    credentials = None
+    
+    
+    with open('key.json') as f:
+        credentials = json.load(f)
+    
+    credentials = service_account.Credentials.from_service_account_file(
+    filename='key.json',
+    scopes=["https://www.googleapis.com/auth/cloud-platform"],
+)
+    client = language_v2.LanguageServiceClient(credentials=credentials)
 
     # text_content = 'I am so happy and joyful.'
 
