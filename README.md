@@ -1,8 +1,11 @@
 <h1 align="center">MindGaurd </h1>
 <p align="center">
 <img src="https://cdn.discordapp.com/attachments/1202362336229462117/1205885295434932264/devFestLogo.png?ex=65d9ff32&is=65c78a32&hm=fea8bde7c48906050dd9ecb9049f9a70bc3a444fb588f550e1fb993be787b6eb&"  width="150" height="150">
+</p>
+<p align="center">
 <b bold>Defend your brain from the Youtube Algorithm. </b>
 </p>
+
 
 # Inspiration
 Did you know that a staggering 49.5% of teens in the US grapple with mental health issues? Confronted by this alarming statistic, we were inspired to harness the transformative power of code to make a tangible impact on their lives. The question became not just "How can code fix that?" but rather, "How can we leverage technology to be a beacon of support and understanding for those navigating the complexities of mental health?"
