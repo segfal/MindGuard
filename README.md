@@ -1,6 +1,6 @@
 <h1 align="center">MindGuard</h1>
 <p align="center">
-<img src="https://cdn.discordapp.com/attachments/1202362336229462117/1205885295434932264/devFestLogo.png?ex=65d9ff32&is=65c78a32&hm=fea8bde7c48906050dd9ecb9049f9a70bc3a444fb588f550e1fb993be787b6eb&"  width="350" height="350">
+<img src="https://github.com/segfal/MindGuard/assets/48507154/9e4127f7-3dab-41e0-96f8-bd327705b5ae"  width="350" height="350">
 </p>
 <p align="center">
 <b bold>Defend your brain from the Youtube Algorithm. </b>
